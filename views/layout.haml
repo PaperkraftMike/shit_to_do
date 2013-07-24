@@ -1,0 +1,23 @@
+!!!
+%html
+  %head
+    %link{:href => "/bootstrap.min.css", :type => "text/css", :rel => "stylesheet"}
+    %title
+      Sh*t to do 
+  %body
+    %h1 Hello!
+    .span4
+      %ul
+        %li 
+          %a{:href => '/about'} About
+        %li
+          %a{:href => '/'} Home 
+        %li 
+          %a{:href => '/signin'} Sign In
+        %li
+          %a{:href => '/signout'} Sign Out 
+        %li 
+          %a{:href => '/tasks'} My Tasks
+        %li
+          %a{:href => '/profile'} Profile
+    =yield 
