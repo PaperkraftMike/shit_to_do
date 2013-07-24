@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+
+  def full_name
+  	fname + " " + lname
+  end
+
   has_many :tasks 
 end
 

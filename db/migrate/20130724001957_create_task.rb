@@ -8,7 +8,8 @@ class CreateTask < ActiveRecord::Migration
   		t.datetime :ttime
   		t.integer :user_id
   		t.integer :friend_id
-  		t.string :location 
+  		t.string :location
+  		t.boolean :completed 
   end
  end
 

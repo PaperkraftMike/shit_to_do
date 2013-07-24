@@ -1,2 +1,10 @@
 %h1
-  =@user.fname
+  Hi #{@user.full_name}
+  %br
+  %br
+%h3
+  Here are the things you still have left to do
+-@user.tasks.each do |task|
+  %a{:href => '/task/:id'}=task.tname
+  %button.btn.btn-small Completed
+  %button.btn.btn-small View Details

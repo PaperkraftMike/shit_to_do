@@ -11,7 +11,12 @@ get '/' do
 	haml :home
 end
 
-get '/user/:id' do
+get '/users/:id' do
 	@user = User.find(params[:id])
 	haml :profile
+end
+
+get '/tasks/:id' do
+	@task = Task.find(params[:id])
+	haml :task
 end

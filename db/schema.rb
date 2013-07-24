@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20130724001957) do
     t.integer  "user_id"
     t.integer  "friend_id"
     t.string   "location"
+    t.boolean  "completed"
   end
 
   create_table "users", force: true do |t|
