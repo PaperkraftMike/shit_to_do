@@ -52,14 +52,14 @@ get '/users/:id/addtask' do
 	haml :new_task
 end
 
-post '/users/:id/addtask/new' do
+post '/addtask' do
+  	@task = Task.create(params)
 	@user = current_user
-	@task = Task.create(params)
 	@user.tasks << @task
-	redirect 'users' + user.id.to_s
+	redirect 'users/' + @user.id.to_s
 end
 
-post '/signup' do
+post '/users/signup' do
 	User.create(params)
 	redirect '/'
 end

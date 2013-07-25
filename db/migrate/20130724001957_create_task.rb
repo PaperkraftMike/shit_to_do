@@ -5,13 +5,14 @@ class CreateTask < ActiveRecord::Migration
   		t.string :tdisc
   		t.datetime :created_at
   		t.datetime :completed_at
-  		t.datetime :ttime
+  		t.string :ttime
+  		t.string :tdate
   		t.integer :user_id
   		t.integer :friend_id
   		t.string :location
   		t.boolean :completed 
-  end
- end
+   end
+end
 
   def down
   	drop_table :tasks
