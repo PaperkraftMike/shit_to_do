@@ -6,3 +6,10 @@
 %h3
   Location
 =@task.location
+%h3
+  Created At
+=@task.created_at.strftime("%B %d, %Y at %I:%M %P")
+-if !@task.completed_at.nil?
+  %h3 
+    Completed At
+  =@task.completed_at.strftime("%B %d, %Y at %I:%M %P")

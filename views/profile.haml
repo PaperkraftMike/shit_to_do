@@ -7,6 +7,21 @@
 %h3
   Here are the things you still have left to do
 -@user.tasks.each do |task|
-  %a{:href => '/task/:id'}=task.tname
-  %button.btn.btn-small Completed
-  %button.btn.btn-small View Details
+  -if task.completed.nil?
+    %h3
+      %a{:href => '/tasks/' + task.id.to_s}=task.tname
+    %form{:action => "/#{task.id}/completetask", :method => "post"}
+      %button.btn.btn-small Completed
+    %a{:href => '/tasks/' + task.id.to_s}
+      %button.btn.btn-small View Details
+    %br
+%h3
+  Here are your recently completed tasks
+-@user.tasks.each do |task|
+  -if !task.completed.nil?
+    %h3
+      %a{:href => '/tasks/' + task.id.to_s}=task.tname
+    %a{:href => '/tasks/' + task.id.to_s}
+      %button.btn.btn-small View Details
+    %br
+

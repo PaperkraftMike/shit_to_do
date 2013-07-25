@@ -72,6 +72,14 @@ get '/signin' do
 	haml :signin
 end
 
+post '/:id/completetask' do
+	@task = Task.find(params[:id])
+	@user = current_user
+	@task.completed = true
+  @task.completed_at = Time.now
+  @task.save
+	redirect 'users/' + @user.id.to_s
+end
 
 
 
