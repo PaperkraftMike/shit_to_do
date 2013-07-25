@@ -43,5 +43,16 @@ post '/users/:id/task/new' do
 	@user = User.find(params[:id])
 	@task = Task.create(params)
 	@user << @task
-	redirect 'users/:id'
+	redirect 'users' + user.id.to_s
 end
+
+post '/users/signup' do
+	User.create(params)
+	redirect '/'
+end
+
+get '/signup' do 
+	haml :signup
+end
+
+
