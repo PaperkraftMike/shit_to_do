@@ -24,6 +24,20 @@ get '/' do
 	haml :home
 end
 
+post '/signin' do
+	@user = User.where(:email => params[:email]).first
+	if @user
+		if @user.password == params[:password]
+			session[:user_id] = @user.id
+			redirect '/users/' + @user.id.to_s
+	    else
+	    	redirect '/'
+	    end
+	else
+		redirect '/signup'
+	end
+end
+
 get '/users/:id' do
 	@user = User.find(params[:id])
 	haml :profile
@@ -34,7 +48,7 @@ get '/tasks/:id' do
 	haml :task
 end
 
-get '/users/:id/task/new' do
+get '/users/:id/tasks/new' do
 	@user = User.find(params[:id])
 	haml :new_task
 end
@@ -46,7 +60,7 @@ post '/users/:id/task/new' do
 	redirect 'users' + user.id.to_s
 end
 
-post '/users/signup' do
+post '/signup' do
 	User.create(params)
 	redirect '/'
 end
@@ -54,5 +68,14 @@ end
 get '/signup' do 
 	haml :signup
 end
+
+get '/signin' do
+	haml :signin
+end
+
+
+
+
+
 
 

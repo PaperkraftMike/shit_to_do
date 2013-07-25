@@ -1,7 +1,7 @@
 %h1
   Hi #{@user.full_name}
   %br
-%a{:href => '/users/:id/task/new'} 
+%a{:href => '/users/#{@user.id}/tasks/new'} 
   %button.btn.btn-large Add a task
 %h3
   Here are the things you still have left to do
