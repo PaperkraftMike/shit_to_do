@@ -1,7 +1,8 @@
 %h1
   Hi #{@user.full_name}
   %br
-  %br
+%a{:href => '/users/:id/task/new'} 
+  %button.btn.btn-large Add a task
 %h3
   Here are the things you still have left to do
 -@user.tasks.each do |task|

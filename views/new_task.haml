@@ -1,0 +1,26 @@
+%h1 Create New Task
+
+%form{:action => "users/:id/tasks/new", :method => "post"}
+  %label{:name => "tname"}Task Name
+  %input{:type => "text", :name => "tname"}
+
+  %label{:name => "tdisc"} Description
+  %textarea{:type => "text", :name => "tdisc"}
+
+  %label{:name => "ttime"} Date
+  %input{:type => "date", :name => "ttime"}
+
+  %label{:name => "ttime"} Time
+  %input{:type => "time", :name => "ttime"}
+
+  %label{:name => "location"} Location
+  %input{:type => "text", :name => "location"}
+
+  %input{:type => "submit", :class => "btn"}
+
+
+
+
+
+ 
+
