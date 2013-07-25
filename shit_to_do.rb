@@ -24,6 +24,7 @@ get '/' do
 	haml :home
 end
 
+<<<<<<< HEAD
 post '/signin' do
 	@user = User.where(:email => params[:email]).first
 	if @user
@@ -80,9 +81,3 @@ post '/:id/completetask' do
   @task.save
 	redirect 'users/' + @user.id.to_s
 end
-
-
-
-
-
-

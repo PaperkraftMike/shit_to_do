@@ -2,25 +2,32 @@
 %html
   %head
     %link{:href => "/bootstrap.min.css", :type => "text/css", :rel => "stylesheet"}
-    %title
-      Sh*t to do 
+    %title Sh*t to do 
   %body
-    .span4.offset2
-      %h1 Hello!
-      %ul
-        %li 
-          %a{:href => '/about'} About
-        %li
-          %a{:href => '/'} Home 
-        %li 
-          %a{:href => '/signin'} Sign In
-        %li
-          %a{:href => '/signout'} Sign Out 
-        %li
-          %a{:href => '/signup'} Sign Up
-        %li 
-          %a{:href => '/tasks'} My Tasks
-        %li
-          %a{:href => '/profile'} Profile
-        =yield 
 
+  %h1 Sh*t to do!
+  %br
+  %br
+  .container-fluid
+  .row-fluid
+    .span2
+      %ul.nav.nav-list
+        %li{:class => ("active" if request.path_info[1..-1] == "about")}
+          %a{:href => '/about'} about
+        %li{:class => ("active" if request.path_info[1..-1] == "")}
+          %a{:href => '/'} home
+        %li{:class => ("active" if request.path_info[1..-1] == "signin")}
+          %a{:href => '/signin'} sign in 
+        %li{:class => ("active" if request.path_info[1..-1] == "signup")}
+          %a{:href => '/signup'} sign up 
+        %li{:class => ("active" if request.path_info[1..-1] == "tasks")}
+          %a{:href => '/tasks'} my tasks
+        %li{:class => ("active" if request.path_info[1..-1] == "profile")}
+          %a{:href => '/profile'} profile
+          
+        
+    / Sidebar content
+    .span10
+
+      / Body content
+      =yield 
