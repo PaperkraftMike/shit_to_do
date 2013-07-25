@@ -1,6 +1,6 @@
 %h1 Create New Task
 
-%form{:action => "users/:id/tasks/new", :method => "post"}
+%form{:action => "/users/#{current_user.id}/addtask/new", :method => "post"}
   %label{:name => "tname"}Task Name
   %input{:type => "text", :name => "tname"}
 

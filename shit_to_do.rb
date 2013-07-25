@@ -48,15 +48,14 @@ get '/tasks/:id' do
 	haml :task
 end
 
-get '/users/:id/tasks/new' do
-	@user = User.find(params[:id])
+get '/users/:id/addtask' do
 	haml :new_task
 end
 
-post '/users/:id/task/new' do
-	@user = User.find(params[:id])
+post '/users/:id/addtask/new' do
+	@user = current_user
 	@task = Task.create(params)
-	@user << @task
+	@user.tasks << @task
 	redirect 'users' + user.id.to_s
 end
 
