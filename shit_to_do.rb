@@ -24,7 +24,7 @@ get '/' do
 	haml :home
 end
 
-<<<<<<< HEAD
+
 post '/signin' do
 	@user = User.where(:email => params[:email]).first
 	if @user
@@ -80,4 +80,10 @@ post '/:id/completetask' do
   @task.completed_at = Time.now
   @task.save
 	redirect 'users/' + @user.id.to_s
+end
+
+get '/signout' do
+  session[:user_id] = nil
+  flash[:notice] = "You have been signed out"
+  redirect '/'
 end

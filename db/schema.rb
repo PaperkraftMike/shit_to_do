@@ -10,7 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130724001957) do
+ActiveRecord::Schema.define(version: 20130726003649) do
+
+  create_table "friends", force: true do |t|
+    t.integer "user_id"
+    t.integer "friend_id"
+  end
 
   create_table "tasks", force: true do |t|
     t.string   "tname"

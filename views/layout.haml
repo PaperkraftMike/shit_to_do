@@ -22,8 +22,11 @@
           %a{:href => '/signup'} sign up 
         %li{:class => ("active" if request.path_info[1..-1] == "tasks")}
           %a{:href => '/tasks'} my tasks
-        %li{:class => ("active" if request.path_info[1..-1] == "profile")}
-          %a{:href => '/profile'} profile
+        -if !current_user.nil?
+          %li{:class => ("active" if request.path_info[1..-1] == "profile")}
+            %a{:href => "/users/#{current_user.id.to_s}"} profile
+          %li{:class => ("active" if request.path_info[1..-1] == "profile")}
+            %a{:href => "/signout"} signout
           
         
     / Sidebar content
