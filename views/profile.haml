@@ -5,7 +5,11 @@
 
     %form{:action => "/users/#{@user.id}/addtask"}
       %button.btn.btn-large Add a task
-
+  %h3
+    Friends
+  -if !@user.friends.nil?
+    -@user.friendships.each do |friend|
+      =User.find(friend.friend_id).full_name
   %h3
     Here are the things you still have left to do
   -@user.tasks.each do |task|
@@ -33,8 +37,24 @@
 -else
   %h1
     =@user.full_name
-  %form{:action => "/users/addfriend"}
+  %form{:action => "/users/addfriend/#{@user.id}", :method => "post"}
     %button.btn.btn-large Add Friend
+  %h3
+    Bio
+  =@user.bio
+  %br
+  %h3
+    Location
+  =@user.full_location
+  %h3
+    Public To Do List
+  -@user.tasks.each do |task|
+    -if task.completed.nil? 
+      =task.tname 
+      on 
+      =task.tdate
+      %br
+
 
 
 

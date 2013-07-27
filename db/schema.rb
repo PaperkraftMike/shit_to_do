@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 20130726003649) do
 
-  create_table "friends", force: true do |t|
+  create_table "friendships", force: true do |t|
     t.integer "user_id"
     t.integer "friend_id"
   end

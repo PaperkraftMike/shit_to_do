@@ -54,7 +54,7 @@ get '/users/:id/addtask' do
 end
 
 post '/addtask' do
-  	@task = Task.create(params)
+  @task = Task.create(params)
 	@user = current_user
 	@user.tasks << @task
 	redirect 'users/' + @user.id.to_s
@@ -87,3 +87,12 @@ get '/signout' do
   flash[:notice] = "You have been signed out"
   redirect '/'
 end
+
+post '/users/addfriend/:id' do
+  @friend = Friendship.create(:friend_id => params[:id])
+  @user = current_user
+  @user.friendships << @friend
+  redirect 'users/' + @user.id.to_s
+end
+
+
