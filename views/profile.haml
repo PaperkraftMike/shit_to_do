@@ -7,9 +7,18 @@
       %button.btn.btn-large Add a task
   %h3
     Friends
-  -if !@user.friends.nil?
+  -if !@user.friendships.nil?
     -@user.friendships.each do |friend|
+      -if friend.confirmed == true
+        %a{:href => "/users/#{friend.friend_id}"}=User.find(friend.friend_id).full_name
+  %h3
+    Pending Friendships
+  -@user.friendships.each do |friend|
+    -if friend.confirmed == nil
       =User.find(friend.friend_id).full_name
+      %form{:action => "/confirmfriend/#{friend.id}", :method => "post"}
+        %button.btn.btn-small Confirm?
+
   %h3
     Here are the things you still have left to do
   -@user.tasks.each do |task|

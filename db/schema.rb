@@ -15,6 +15,9 @@ ActiveRecord::Schema.define(version: 20130726003649) do
   create_table "friendships", force: true do |t|
     t.integer "user_id"
     t.integer "friend_id"
+    t.boolean "requested"
+    t.boolean "pending"
+    t.boolean "confirmed"
   end
 
   create_table "tasks", force: true do |t|

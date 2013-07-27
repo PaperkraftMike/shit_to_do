@@ -91,7 +91,17 @@ end
 post '/users/addfriend/:id' do
   @friend = Friendship.create(:friend_id => params[:id])
   @user = current_user
+  @friend.requested = true
+  @friend.pending = true
   @user.friendships << @friend
+  redirect 'users/' + @user.id.to_s
+end
+
+post '/confirmfriend/:id' do
+  @user = current_user
+  @friendship = Friendship.find(params[:id])
+  @friendship.confirmed = true
+  @friendship.save
   redirect 'users/' + @user.id.to_s
 end
 
