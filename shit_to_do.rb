@@ -2,12 +2,13 @@ require 'sinatra'
 require 'haml'
 require 'sinatra/activerecord'
 
-set :database, "sqlite3:///shit_to_do.sqlite3"
+configure(:development){set :database, "sqlite3:///shit_to_do.sqlite3"}
 
 require './models.rb'
 require 'bundler/setup'
 require 'sinatra/base'
 require 'rack-flash'
+require 'gravtastic'
 
 enable :sessions
 use Rack::Flash, :sweep => true
@@ -140,6 +141,13 @@ post '/denytask/:id' do
   @task.save
   redirect 'users/' + @user.id.to_s
 end
+
+get '/search' do
+  @found_users = User.all(:fname => params[:search])
+  @found_tasks = Tasks.all(:tname => params[:search])
+  haml :searchresults
+end
+
 
 
 

@@ -2,9 +2,9 @@
   %h1
     Hi #{@user.full_name}
     %br
-
-    %form{:action => "/users/#{@user.id}/addtask"}
-      %button.btn.btn-large Add a task
+  %img{:src => @user.gravatar_url}
+  %form{:action => "/users/#{@user.id}/addtask"}
+    %button.btn.btn-large Add a task
   %h3
     Notifications:
   -@user.friendships.each do |friend|

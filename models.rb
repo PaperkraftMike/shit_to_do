@@ -1,3 +1,5 @@
+require 'gravtastic'
+
 class User < ActiveRecord::Base
 
   def full_name
@@ -8,6 +10,8 @@ class User < ActiveRecord::Base
     city + ", " + state
   end
 
+  include Gravtastic
+  gravtastic
 
   has_many :tasks 
   has_many :friendships

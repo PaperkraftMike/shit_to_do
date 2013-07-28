@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130728030327) do
+ActiveRecord::Schema.define(version: 20130728191901) do
 
   create_table "friendships", force: true do |t|
     t.integer "user_id"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20130728030327) do
     t.integer "zipcode"
     t.text    "bio"
     t.integer "tasks"
+    t.string  "password_hash"
+    t.string  "password_salt"
   end
 
 end

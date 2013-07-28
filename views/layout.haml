@@ -27,8 +27,9 @@
             %a{:href => "/users/#{current_user.id.to_s}"} profile
           %li{:class => ("active" if request.path_info[1..-1] == "profile")}
             %a{:href => "/signout"} signout
-          
-        
+    %form{:action => "/search", :method => "get"}
+      %input{:name => "search", :placeholder => "Search for new friends or activities", :type => "text"}
+      %input{:type => "submit", :class => "btn"}        
     / Sidebar content
     .span10
 
