@@ -141,8 +141,8 @@ post '/denytask/:id' do
 end
 
 get '/search' do
-  @found_users = User.all(:fname => params[:search])
-  @found_tasks = Tasks.all(:tname => params[:search])
+  @found_users = User.where("fname LIKE ?", "%#{params[:search]}%")
+  @found_tasks = Task.where("tname LIKE?", "%#{params[:search]}%")
   haml :searchresults
 end
 

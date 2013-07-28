@@ -1,3 +1,35 @@
-HELLO! 
-=@found_users
-=@found_tasks
+%h1
+  Search Results
+%h3
+  Users matching your search
+%br
+-@found_users.each do |user|
+  %h4
+    %a{:href => '/users/' + user.id.to_s}=user.full_name
+    -if !user.bio.nil?
+      %h5
+        Bio
+      =user.bio
+    -if !user.city.nil? && !user.city.nil?
+      %h5
+        Location
+      =user.city
+      =user.state
+  %form{:action => "/users/addfriend/#{user.id}", :method => "post"}
+    %button.btn.btn-large Add Friend
+  %br
+  %br
+%h3
+  Tasks matching your search
+-@found_tasks.each do |task|
+  %h4
+    %a{:href => '/tasks/' + task.id.to_s}=task.tname
+  =task.tdisc
+  %br
+  %br
+  Task owner 
+  %a{:href => '/users/' + task.user_id.to_s}=User.find(task.user_id).full_name
+  %form{:action => "/taskrequest/" + task.id.to_s, :method => "post"}
+    %button.btn.btn-small Request to be added
+  %br
+  %br
