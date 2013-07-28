@@ -28,18 +28,16 @@ end
 
 
 post '/signin' do
-	@user = User.where(:email => params[:email]).first
-	if @user
-		if @user.password == params[:password]
-			session[:user_id] = @user.id
-			redirect '/users/' + @user.id.to_s
-	    else
-	    	redirect '/'
-	    end
-	else
-		redirect '/signup'
-	end
-end
+  @user = User.authenticate(params[:email], params[:password])
+    if @user
+      session[:user_id] = @user.id
+      flash[:notice] = "Welcome back!"
+      redirect '/users/' + @user.id.to_s
+    else
+      flash[:notice] = "You're not a user yet, or you password is wrong."
+      redirect '/signup'
+    end
+  end
 
 get '/users/:id' do
 	@user = User.find(params[:id])
