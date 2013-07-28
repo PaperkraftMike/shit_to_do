@@ -17,10 +17,11 @@ set :sessions => true
 helpers do 
   def current_user
     session[:user_id].nil? ? nil : User.find(session[:user_id])
-    end
- end 
+  end
+end 
 
 get '/' do
+  @user = current_user
 	haml :home
 end
 
@@ -104,5 +105,49 @@ post '/confirmfriend/:id' do
   @friendship.save
   redirect 'users/' + @user.id.to_s
 end
+
+post '/destroyfriend/:id' do
+  @user = current_user
+  @friendship = Friendship.find(params[:id])
+  @friendship.destroy
+  redirect 'users/' + @user.id.to_s
+end
+
+post '/taskrequest/:id' do
+  @user = current_user
+  @task = Task.find(params[:id])
+  @task.task_public = true
+  @task.pending = true
+  @task.friend_id = @user.id 
+  @task.save
+  redirect '/'
+end
+
+post '/confirmtask/:id' do
+  @user = current_user
+  @task = Task.find(params[:id])
+  @task.approved = true
+  @task.pending = nil
+  @task.save
+  redirect 'users/' + @user.id.to_s
+end
+
+post '/denytask/:id' do
+  @user = current_user
+  @task = Task.find(params[:id])
+  @task.approved = false
+  @task.friend_id = nil
+  @task.save
+  redirect 'users/' + @user.id.to_s
+end
+
+
+
+
+
+
+
+  
+
 
 

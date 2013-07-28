@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726003649) do
+ActiveRecord::Schema.define(version: 20130728030327) do
 
   create_table "friendships", force: true do |t|
     t.integer "user_id"
@@ -31,6 +31,10 @@ ActiveRecord::Schema.define(version: 20130726003649) do
     t.integer  "friend_id"
     t.string   "location"
     t.boolean  "completed"
+    t.boolean  "task_public"
+    t.boolean  "task_private"
+    t.boolean  "pending"
+    t.boolean  "approved"
   end
 
   create_table "users", force: true do |t|
