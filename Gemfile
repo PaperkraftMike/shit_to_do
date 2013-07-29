@@ -9,6 +9,7 @@ gem 'rake'
 gem 'rack-flash3', :git => "git://github.com/treeder/rack-flash.git"
 gem 'gravtastic'
 gem 'bcrypt-ruby'
+gem 'pony'
 
 group :development do 
   gem 'sqlite3'

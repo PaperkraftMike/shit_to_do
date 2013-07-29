@@ -1,18 +1,20 @@
 require 'gravtastic'
 
+
 class User < ActiveRecord::Base
 
   before_save :encrypt_password
+  
 
   def full_name
-  	fname + " " + lname
+  	self.fname + " " + self.lname
   end
 
   def full_location
     city + ", " + state
   end
 
-  def encrpyt_password
+  def encrypt_password
     if self.password.present?
       self.password_salt = BCrypt::Engine.generate_salt
       self.password_hash = BCrypt::Engine.hash_secret(password, password_salt)
@@ -28,8 +30,12 @@ class User < ActiveRecord::Base
     end
   end
 
+ 
+
   include Gravtastic
   gravtastic
+
+   
 
   has_many :tasks 
   has_many :friendships
