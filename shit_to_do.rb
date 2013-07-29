@@ -123,7 +123,7 @@ post '/users/addfriend/:id' do
   :from => "gettingstuffdone123@gmail.com",
   :to => User.find(@friend.friend_id).email,
   :subject => "You have a new friend request!",
-  :body => "#{User.find(@friend.friend_id)} wants to be friends. Log in to your account to view their profile.",
+  :body => "#{User.find(@friend.friend_id).full_name} wants to be friends. Log in to your account to view their profile.",
   :via => :smtp,
   :via_options => {
   :address              => 'smtp.gmail.com',
@@ -145,9 +145,9 @@ post '/confirmfriend/:id' do
   @friendship.save
   Pony.mail({
   :from => "gettingstuffdone123@gmail.com",
-  :to => User.find(@friend.friend_id).email,
+  :to => User.find(@friendship.friend_id).email,
   :subject => "Your friend request was confirmed!",
-  :body => "#{User.find(@friend.friend_id)} approved your friend request. Log in to your account to see their tasks and start sharing the productivity",
+  :body => "#{User.find(@friendship.friend_id).full_name} approved your friend request. Log in to your account to see their tasks and start sharing the productivity",
   :via => :smtp,
   :via_options => {
   :address              => 'smtp.gmail.com',
@@ -179,8 +179,8 @@ post '/taskrequest/:id' do
   Pony.mail({
   :from => "gettingstuffdone123@gmail.com",
   :to => User.find(@task.user_id).email,
-  :subject => "#{User.find(@user.id)} someone wants to share your task!",
-  :body => "#{User.find(@task.friend_id)} wants to be part of your to do list. Log in to your account to see what they want.",
+  :subject => "#{User.find(@user.id).full_name} someone wants to share your task!",
+  :body => "#{User.find(@task.friend_id).full_name} wants to be part of your to do list. Log in to your account to see what they want.",
   :via => :smtp,
   :via_options => {
   :address              => 'smtp.gmail.com',
@@ -204,8 +204,8 @@ post '/confirmtask/:id' do
   Pony.mail({
   :from => "gettingstuffdone123@gmail.com",
   :to => User.find(@task.friend_id).email,
-  :subject => "#{User.find(@friend_id)} your request to share a task has been approved!",
-  :body => "#{User.find(@task.user_id)} has approved your request to share their task. Log in to your account to see what they want.",
+  :subject => "#{User.find(@friend_id).full_name} your request to share a task has been approved!",
+  :body => "#{User.find(@task.user_id).full_name} has approved your request to share their task. Log in to your account to see what they want.",
   :via => :smtp,
   :via_options => {
   :address              => 'smtp.gmail.com',
