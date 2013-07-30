@@ -1,6 +1,6 @@
-namespace :db do
+namespace :email do
 
-task :sendmail => :environment do
+task :send => :environment do
   Task.where("tdate" == Date.today.to_s).each do |t|
     require 'pony' 
     Pony.mail({
