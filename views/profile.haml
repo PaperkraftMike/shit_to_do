@@ -2,9 +2,33 @@
   %h1
     Hi #{@user.full_name}
     %br
-
-    %form{:action => "/users/#{@user.id}/addtask"}
-      %button.btn.btn-large Add a task
+  %img{:src => @user.gravatar_url}
+  %form{:action => "/users/#{@user.id}/addtask"}
+    %button.btn.btn-large Add a task
+  %h3
+    Notifications:
+  -@user.friendships.each do |friend|
+    -if friend.confirmed == nil
+      %a{:href => "/users/#{friend.friend_id}"}=User.find(friend.friend_id).full_name 
+      wants to be friends
+      %form{:action => "/confirmfriend/#{friend.id}", :method => "post"}
+        %button.btn.btn-small Confirm?
+      %form{:action => "/destroyfriend/#{friend.id}", :method => "post"}
+        %button.btn.btn-small Deny?
+  -@user.tasks.each do |task|
+    -if task.pending == true
+      %a{:href => "/users/#{task.friend_id}"}=User.find(task.friend_id).full_name 
+      wants to join you for #{task.tname}
+      %form{:action => "/confirmtask/#{task.id}", :method => "post"}
+        %button.btn.btn-small Confirm?
+      %form{:action => "/denytask/#{task.id}", :method => "post"}
+        %button.btn.btn-small Deny?
+  %h3
+    Friends
+  -if !@user.friendships.nil?
+    -@user.friendships.each do |friend|
+      -if friend.confirmed == true
+        %a{:href => "/users/#{friend.friend_id}"}=User.find(friend.friend_id).full_name
 
   %h3
     Here are the things you still have left to do
@@ -33,8 +57,24 @@
 -else
   %h1
     =@user.full_name
-  %form{:action => "/users/addfriend"}
+  %form{:action => "/users/addfriend/#{@user.id}", :method => "post"}
     %button.btn.btn-large Add Friend
+  %h3
+    Bio
+  =@user.bio
+  %br
+  %h3
+    Location
+  =@user.full_location
+  %h3
+    Public To Do List
+  -@user.tasks.each do |task|
+    -if task.completed.nil? 
+      =task.tname 
+      on 
+      =task.tdate
+      %br
+
 
 
 

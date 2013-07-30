@@ -26,12 +26,22 @@ GEM
       tzinfo (~> 0.3.37)
     arel (4.0.0)
     atomic (1.1.10)
+    bcrypt-ruby (3.1.1)
     builder (3.1.4)
+    gravtastic (3.2.6)
     haml (4.0.3)
       tilt
     i18n (0.6.4)
+    mail (2.5.4)
+      mime-types (~> 1.16)
+      treetop (~> 1.4.8)
+    mime-types (1.23)
     minitest (4.7.5)
     multi_json (1.7.7)
+    pg (0.15.1)
+    polyglot (0.3.3)
+    pony (1.5)
+      mail (> 2.0)
     rack (1.5.2)
     rack-protection (1.5.0)
       rack
@@ -47,6 +57,9 @@ GEM
     thread_safe (0.1.0)
       atomic
     tilt (1.4.1)
+    treetop (1.4.14)
+      polyglot
+      polyglot (>= 0.3.1)
     tzinfo (0.3.37)
 
 PLATFORMS
@@ -54,7 +67,11 @@ PLATFORMS
 
 DEPENDENCIES
   activerecord
+  bcrypt-ruby
+  gravtastic
   haml
+  pg
+  pony
   rack-flash3!
   rake
   sinatra
