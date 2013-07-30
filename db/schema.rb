@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(version: 20130728191901) do
     t.datetime "created_at"
     t.datetime "completed_at"
     t.string   "ttime"
-    t.string   "tdate"
     t.integer  "user_id"
     t.integer  "friend_id"
     t.string   "location"
@@ -35,6 +34,7 @@ ActiveRecord::Schema.define(version: 20130728191901) do
     t.boolean  "task_private"
     t.boolean  "pending"
     t.boolean  "approved"
+    t.string   "tdate"
   end
 
   create_table "users", force: true do |t|
