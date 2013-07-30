@@ -1,4 +1,25 @@
 
-%h3 this is Home yo! 
-%p Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+%h3 The social place to get stuff done
+
+-if !current_user.nil?
+  %h3
+    Here's what your friends are up to #{@user.full_name}
+  -@user.friendships.each do |friendship|
+    -friend = User.find(friendship.friend_id)
+    %h4
+      %a{:href => '/users/' + friend.id.to_s}=friend.full_name
+      has the following tasks to complete
+    -friend.tasks.each do |task|
+      %a{:href => '/tasks/' + task.id.to_s}=task.tname
+      -if task.pending? && task.friend_id == current_user.id
+        %br
+        Request to join pending
+        %br
+        %br
+      -elsif task.approved? && task.friend_id == current_user.id
+        You've been approved!
+      -else
+        %form{:action => "/taskrequest/" + task.id.to_s, :method => "post"}
+          %button.btn.btn-small Request to be added
+        %br
 

@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130726003649) do
+ActiveRecord::Schema.define(version: 20130728191901) do
 
-  create_table "friends", force: true do |t|
+  create_table "friendships", force: true do |t|
     t.integer "user_id"
     t.integer "friend_id"
+    t.boolean "requested"
+    t.boolean "pending"
+    t.boolean "confirmed"
   end
 
   create_table "tasks", force: true do |t|
@@ -23,11 +26,15 @@ ActiveRecord::Schema.define(version: 20130726003649) do
     t.datetime "created_at"
     t.datetime "completed_at"
     t.string   "ttime"
-    t.string   "tdate"
     t.integer  "user_id"
     t.integer  "friend_id"
     t.string   "location"
     t.boolean  "completed"
+    t.boolean  "task_public"
+    t.boolean  "task_private"
+    t.boolean  "pending"
+    t.boolean  "approved"
+    t.string   "tdate"
   end
 
   create_table "users", force: true do |t|
@@ -40,6 +47,8 @@ ActiveRecord::Schema.define(version: 20130726003649) do
     t.integer "zipcode"
     t.text    "bio"
     t.integer "tasks"
+    t.string  "password_hash"
+    t.string  "password_salt"
   end
 
 end
