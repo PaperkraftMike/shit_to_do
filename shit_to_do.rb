@@ -71,22 +71,7 @@ post '/users/signup' do
   	User.create(params)
     @users = User.all
     flash[:notice] = "Thanks for signing up"
-    Pony.mail({
-      :from => "gettingstuffdone123@gmail.com",
-      :to => params[:email],
-      :subject => "Welcome to getting shit done",
-      :body => "We're so happy to have you, and hope you enjoy being productive with us.",
-      :via => :smtp,
-      :via_options => {
-      :address              => 'smtp.gmail.com',
-      :port                 => '587',
-      :enable_starttls_auto => true,
-      :user_name            => 'gettingstuffdone123@gmail.com',
-      :password             => 'shit_to_do',
-      :authentication       => :plain, 
-      :domain               => "localhost.localdomain" 
-       }
-      })
+
 	redirect '/'
 end
 
