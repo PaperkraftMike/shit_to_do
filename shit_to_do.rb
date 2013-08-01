@@ -64,7 +64,6 @@ end
 
 post '/users/signup' do
   	User.create(params)
-    @users = User.all
     flash[:notice] = "Thanks for signing up"
 	redirect '/'
 end
