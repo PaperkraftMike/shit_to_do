@@ -63,7 +63,9 @@ post '/addtask' do
 end
 
 post '/users/signup' do
-  	User.create(params)
+  	@user = User.create(params)
+    @user = current_user
+    @user = session[:user_id]
     flash[:notice] = "Thanks for signing up"
 	redirect '/'
 end
