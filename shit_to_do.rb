@@ -12,11 +12,6 @@ require 'gravtastic'
 require 'pony'
 require 'bcrypt'
 
-Pony.options = { :from => "gettingstuffdone123@gmail.com", :via => :smtp, :via_options => { 
-    :address => 'smtp.gmail.com',
-    :port           => '25',
-    }}
-
 enable :sessions
 use Rack::Flash, :sweep => true
 
@@ -71,7 +66,6 @@ post '/users/signup' do
   	User.create(params)
     @users = User.all
     flash[:notice] = "Thanks for signing up"
-
 	redirect '/'
 end
 
@@ -104,22 +98,6 @@ post '/users/addfriend/:id' do
   @friend.requested = true
   @friend.pending = true
   @user.friendships << @friend
-  Pony.mail({
-  :from => "gettingstuffdone123@gmail.com",
-  :to => User.find(@friend.friend_id).email,
-  :subject => "You have a new friend request!",
-  :body => "#{User.find(@friend.friend_id).full_name} wants to be friends. Log in to your account to view their profile.",
-  :via => :smtp,
-  :via_options => {
-  :address              => 'smtp.gmail.com',
-  :port                 => '587',
-  :enable_starttls_auto => true,
-  :user_name            => 'gettingstuffdone123@gmail.com',
-  :password             => 'shit_to_do',
-  :authentication       => :plain, 
-  :domain               => "localhost.localdomain" 
-   }
-  })
   redirect 'users/' + @user.id.to_s
 end
 
@@ -128,22 +106,6 @@ post '/confirmfriend/:id' do
   @friendship = Friendship.find(params[:id])
   @friendship.confirmed = true
   @friendship.save
-  Pony.mail({
-  :from => "gettingstuffdone123@gmail.com",
-  :to => User.find(@friendship.friend_id).email,
-  :subject => "Your friend request was confirmed!",
-  :body => "#{User.find(@friendship.friend_id).full_name} approved your friend request. Log in to your account to see their tasks and start sharing the productivity",
-  :via => :smtp,
-  :via_options => {
-  :address              => 'smtp.gmail.com',
-  :port                 => '587',
-  :enable_starttls_auto => true,
-  :user_name            => 'gettingstuffdone123@gmail.com',
-  :password             => 'shit_to_do',
-  :authentication       => :plain, 
-  :domain               => "localhost.localdomain" 
-   }
-  })
   redirect 'users/' + @user.id.to_s
 end
 
@@ -161,22 +123,6 @@ post '/taskrequest/:id' do
   @task.pending = true
   @task.friend_id = @user.id 
   @task.save
-  Pony.mail({
-  :from => "gettingstuffdone123@gmail.com",
-  :to => User.find(@task.user_id).email,
-  :subject => "#{User.find(@user.id).full_name} someone wants to share your task!",
-  :body => "#{User.find(@task.friend_id).full_name} wants to be part of your to do list. Log in to your account to see what they want.",
-  :via => :smtp,
-  :via_options => {
-  :address              => 'smtp.gmail.com',
-  :port                 => '587',
-  :enable_starttls_auto => true,
-  :user_name            => 'gettingstuffdone123@gmail.com',
-  :password             => 'shit_to_do',
-  :authentication       => :plain, 
-  :domain               => "localhost.localdomain" 
-   }
-  })
   redirect '/'
 end
 
@@ -186,22 +132,6 @@ post '/confirmtask/:id' do
   @task.approved = true
   @task.pending = nil
   @task.save
-  Pony.mail({
-  :from => "gettingstuffdone123@gmail.com",
-  :to => User.find(@task.friend_id).email,
-  :subject => "#{User.find(@friend_id).full_name} your request to share a task has been approved!",
-  :body => "#{User.find(@task.user_id).full_name} has approved your request to share their task. Log in to your account to see what they want.",
-  :via => :smtp,
-  :via_options => {
-  :address              => 'smtp.gmail.com',
-  :port                 => '587',
-  :enable_starttls_auto => true,
-  :user_name            => 'gettingstuffdone123@gmail.com',
-  :password             => 'shit_to_do',
-  :authentication       => :plain, 
-  :domain               => "localhost.localdomain" 
-   }
-  })
   redirect 'users/' + @user.id.to_s
 end
 
